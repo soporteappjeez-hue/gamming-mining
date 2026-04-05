@@ -166,7 +166,7 @@ export function Shop() {
                 }}
                 className="px-4 py-2 rounded border border-cyber-danger text-cyber-danger hover:bg-cyber-danger/10"
               >
-                Vender ({selectedComponent.cost * 0.6.toFixed(0)})
+                Vender ({Math.floor(selectedComponent.cost * 0.6)})
               </button>
             )}
           </div>
