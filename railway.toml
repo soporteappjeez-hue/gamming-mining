@@ -1,0 +1,8 @@
+[build]
+builder = "nixpacks"
+
+[build.nixpacks]
+node-version = "20"
+
+[deploy]
+startCommand = "npx serve -s dist -l $PORT"
