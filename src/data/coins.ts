@@ -35,3 +35,238 @@ export const CRYPTOCURRENCIES: Coin[] = [
 
 export const getCoinById = (id: string): Coin | undefined =>
   CRYPTOCURRENCIES.find(c => c.id === id);
+
+// Equipos de minería ampliados
+export interface MiningComponent {
+  id: string;
+  name: string;
+  type: 'gpu' | 'cpu' | 'asic' | 'psu' | 'cooling' | 'rack';
+  hashrate: number; // H/s
+  power: number; // Watts
+  cooling?: number; // Cooling capacity
+  price: number; // USD
+  description: string;
+}
+
+export const MINING_COMPONENTS: MiningComponent[] = [
+  // GPUs
+  {
+    id: 'rtx3060',
+    name: 'NVIDIA RTX 3060',
+    type: 'gpu',
+    hashrate: 50,
+    power: 170,
+    price: 350,
+    description: 'GPU de gama media con excelente rendimiento energético'
+  },
+  {
+    id: 'rtx3070',
+    name: 'NVIDIA RTX 3070',
+    type: 'gpu',
+    hashrate: 80,
+    power: 220,
+    price: 550,
+    description: 'GPU potente para minería profesional'
+  },
+  {
+    id: 'rtx3080',
+    name: 'NVIDIA RTX 3080',
+    type: 'gpu',
+    hashrate: 120,
+    power: 320,
+    price: 850,
+    description: 'Alta performance para minado intensivo'
+  },
+  {
+    id: 'rtx3090',
+    name: 'NVIDIA RTX 3090',
+    type: 'gpu',
+    hashrate: 180,
+    power: 450,
+    price: 1500,
+    description: 'La mejor GPU para minería extrema'
+  },
+  {
+    id: 'rx580',
+    name: 'AMD RX 580',
+    type: 'gpu',
+    hashrate: 30,
+    power: 185,
+    price: 200,
+    description: 'GPU económica para iniciarse en minería'
+  },
+  {
+    id: 'rx6700',
+    name: 'AMD RX 6700 XT',
+    type: 'gpu',
+    hashrate: 65,
+    power: 230,
+    price: 480,
+    description: 'Buen balance entre precio y rendimiento'
+  },
+  // CPUs
+  {
+    id: 'ryzen5',
+    name: 'AMD Ryzen 5 5600X',
+    type: 'cpu',
+    hashrate: 5,
+    power: 65,
+    price: 180,
+    description: 'CPU para minado básico de altcoins'
+  },
+  {
+    id: 'ryzen9',
+    name: 'AMD Ryzen 9 5950X',
+    type: 'cpu',
+    hashrate: 15,
+    power: 105,
+    price: 550,
+    description: 'CPU de alta gama para minado paralelo'
+  },
+  {
+    id: 'i9',
+    name: 'Intel Core i9-12900K',
+    type: 'cpu',
+    hashrate: 12,
+    power: 125,
+    price: 600,
+    description: 'Procesador potente para múltiples tareas'
+  },
+  // ASICs
+  {
+    id: 'antminers9',
+    name: 'Antminer S9',
+    type: 'asic',
+    hashrate: 13500,
+    power: 1323,
+    price: 800,
+    description: 'ASIC clásico para Bitcoin'
+  },
+  {
+    id: 'antminers19',
+    name: 'Antminer S19 Pro',
+    type: 'asic',
+    hashrate: 110000,
+    power: 3250,
+    price: 4500,
+    description: 'ASIC profesional de última generación'
+  },
+  {
+    id: 'whatsminerm30',
+    name: 'Whatsminer M30S++',
+    type: 'asic',
+    hashrate: 112000,
+    power: 3472,
+    price: 4800,
+    description: 'Máxima eficiencia para granjas industriales'
+  },
+  // PSUs
+  {
+    id: 'psu500',
+    name: 'PSU 500W 80 Plus',
+    type: 'psu',
+    hashrate: 0,
+    power: 0,
+    price: 60,
+    description: 'Fuente básica para rigs pequeños'
+  },
+  {
+    id: 'psu750',
+    name: 'PSU 750W 80 Plus Gold',
+    type: 'psu',
+    hashrate: 0,
+    power: 0,
+    price: 120,
+    description: 'Fuente eficiente para rigs medianos'
+  },
+  {
+    id: 'psu1000',
+    name: 'PSU 1000W 80 Plus Platinum',
+    type: 'psu',
+    hashrate: 0,
+    power: 0,
+    price: 250,
+    description: 'Fuente premium para múltiples GPUs'
+  },
+  {
+    id: 'psu1600',
+    name: 'PSU 1600W Mining Edition',
+    type: 'psu',
+    hashrate: 0,
+    power: 0,
+    price: 400,
+    description: 'Fuente industrial para granjas de minería'
+  },
+  // Cooling
+  {
+    id: 'fanbasic',
+    name: 'Ventiladores Base 120mm',
+    type: 'cooling',
+    hashrate: 0,
+    power: 15,
+    cooling: 50,
+    price: 40,
+    description: 'Ventilación básica para rigs'
+  },
+  {
+    id: 'fanpro',
+    name: 'Sistema Cooling Pro',
+    type: 'cooling',
+    hashrate: 0,
+    power: 45,
+    cooling: 150,
+    price: 120,
+    description: 'Refrigeración avanzada para alta carga'
+  },
+  {
+    id: 'liquid',
+    name: 'Refrigeración Líquida',
+    type: 'cooling',
+    hashrate: 0,
+    power: 80,
+    cooling: 300,
+    price: 280,
+    description: 'Sistema líquido para temperaturas extremas'
+  },
+  // Racks
+  {
+    id: 'rackbasic',
+    name: 'Rack Básico 4U',
+    type: 'rack',
+    hashrate: 0,
+    power: 0,
+    price: 150,
+    description: 'Estructura simple para 4 GPUs'
+  },
+  {
+    id: 'rackpro',
+    name: 'Rack Profesional 8U',
+    type: 'rack',
+    hashrate: 0,
+    power: 0,
+    price: 350,
+    description: 'Rack para hasta 8 GPUs con gestión de cables'
+  },
+  {
+    id: 'rackindustrial',
+    name: 'Rack Industrial 12U',
+    type: 'rack',
+    hashrate: 0,
+    power: 0,
+    price: 800,
+    description: 'Rack industrial con sistema de monitoreo'
+  },
+];
+
+// Cálculo de ganancias
+// 1 H/s genera $1 en 30 días (aproximadamente $0.0333 por día)
+export const BASE_EARNING_PER_HASH_PER_DAY = 0.033333;
+
+export function calculateDailyEarning(hashrate: number, coinMultiplier: number = 1): number {
+  // La ganancia se ajusta según el multiplicador de la moneda
+  return hashrate * BASE_EARNING_PER_HASH_PER_DAY * coinMultiplier;
+}
+
+export function calculateEarningForPeriod(hashrate: number, days: number, coinMultiplier: number = 1): number {
+  return calculateDailyEarning(hashrate, coinMultiplier) * days;
+}
