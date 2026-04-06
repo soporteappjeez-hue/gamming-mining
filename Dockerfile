@@ -9,12 +9,15 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
-
-# Build usando los binarios globales
 RUN tsc -b && vite build
 
 FROM nginx:alpine
+
+# Copiar configuración personalizada de nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 COPY --from=builder /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
+
