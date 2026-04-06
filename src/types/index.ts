@@ -7,6 +7,7 @@ export interface Coin {
   price: number; // Precio en USDT
   hashrateContribution: number; // Hashrate base por unidad
   icon: string;
+  color?: string; // Color para la UI (opcional)
 }
 
 export interface WalletBalance {

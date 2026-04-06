@@ -177,7 +177,7 @@ export function Dashboard() {
           <div className="flex-1 overflow-y-auto">
             {activeTab === 'shop' && <Shop />}
             {activeTab === 'allocation' && <MiningAllocation />}
-            {activeTab === 'wallet' && <Wallet balance={balance} />}
+            {activeTab === 'wallet' && <Wallet />}
           </div>
         </div>
 

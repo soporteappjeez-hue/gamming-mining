@@ -44,7 +44,7 @@ export function RealTimeMining({ userHashrate, onBalanceUpdate }: RealTimeMining
 
   // Minado en tiempo real
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval> | null = null;
     
     if (isMining) {
       const earningsPerSecond = calculateEarningsPerSecond();
