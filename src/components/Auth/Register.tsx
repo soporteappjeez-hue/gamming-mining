@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Mail, Lock, Eye, EyeOff, Zap, ArrowRight, User } from 'lucide-react';
+import { signUp } from '../../lib/supabase';
 
 interface RegisterProps {
   onSwitchToLogin: () => void;
@@ -26,17 +27,17 @@ export function Register({ onSwitchToLogin, onRegisterSuccess }: RegisterProps) 
       return;
     }
 
+    if (password.length < 6) {
+      setError('La contraseña debe tener al menos 6 caracteres');
+      setLoading(false);
+      return;
+    }
+
     try {
-      // TODO: Integrar con Supabase Auth
-      console.log('Register:', { username, email, password });
-      
-      // Simulación de registro exitoso
-      setTimeout(() => {
-        setLoading(false);
-        onRegisterSuccess();
-      }, 1000);
-    } catch (err) {
-      setError('Error al registrar. Intenta con otro email.');
+      await signUp(email, password, username);
+      onRegisterSuccess();
+    } catch (err: any) {
+      setError(err.message || 'Error al registrar. Intenta con otro email.');
       setLoading(false);
     }
   };
@@ -105,6 +106,7 @@ export function Register({ onSwitchToLogin, onRegisterSuccess }: RegisterProps) 
                 className="w-full pl-12 pr-12 py-3 bg-[#161b22] border border-[#00ff88]/20 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#00ff88] transition-colors"
                 placeholder="••••••••"
                 required
+                minLength={6}
               />
               <button
                 type="button"

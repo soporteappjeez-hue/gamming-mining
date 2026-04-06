@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Mail, Lock, Eye, EyeOff, Zap, ArrowRight } from 'lucide-react';
+import { signIn } from '../../lib/supabase';
 
 interface LoginProps {
   onSwitchToRegister: () => void;
@@ -19,16 +20,10 @@ export function Login({ onSwitchToRegister, onLoginSuccess }: LoginProps) {
     setError('');
 
     try {
-      // TODO: Integrar con Supabase Auth
-      console.log('Login:', { email, password });
-      
-      // Simulación de login exitoso
-      setTimeout(() => {
-        setLoading(false);
-        onLoginSuccess();
-      }, 1000);
-    } catch (err) {
-      setError('Error al iniciar sesión. Verifica tus credenciales.');
+      await signIn(email, password);
+      onLoginSuccess();
+    } catch (err: any) {
+      setError(err.message || 'Error al iniciar sesión. Verifica tus credenciales.');
       setLoading(false);
     }
   };
