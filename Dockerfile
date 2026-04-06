@@ -10,11 +10,11 @@ RUN npm ci
 
 COPY . .
 
-# Las variables de entorno de Railway se inyectan automáticamente
-# durante el build si están configuradas en el servicio
-RUN export VITE_SUPABASE_URL=$(echo $VITE_SUPABASE_URL) && \
-    export VITE_SUPABASE_ANON_KEY=$(echo $VITE_SUPABASE_ANON_KEY) && \
-    tsc -b && vite build
+# Crear archivo .env con las variables
+RUN echo "VITE_SUPABASE_URL=https://quvujnzocydyhnvvomek.supabase.co" > .env && \
+    echo "VITE_SUPABASE_ANON_KEY=sb_publishable_t97p9B4nwR-5XkADWJgMCg_sQ9zz-GC" >> .env
+
+RUN tsc -b && vite build
 
 FROM nginx:alpine
 
@@ -25,6 +25,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
+
 
 
 
