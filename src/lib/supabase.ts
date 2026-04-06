@@ -40,9 +40,17 @@ export async function signUp(email: string, password: string, username: string) 
 
   if (error) throw error;
 
-  // Crear perfil inicial
+  // El trigger ya crea el perfil automáticamente
+  // Solo actualizamos el username si es necesario
   if (data.user) {
-    await createProfile(data.user.id, username);
+    const { error: updateError } = await supabase
+      .from('profiles')
+      .update({ username })
+      .eq('id', data.user.id);
+    
+    if (updateError) {
+      console.error('Error updating username:', updateError);
+    }
   }
 
   return data;
@@ -69,24 +77,6 @@ export async function getCurrentUser() {
 }
 
 // Funciones de perfil
-export async function createProfile(userId: string, username: string) {
-  const { data, error } = await supabase
-    .from('profiles')
-    .insert([
-      {
-        id: userId,
-        username,
-        balance: 0,
-        hashrate: 0,
-        level: 1,
-        energy_limit: 1000,
-      },
-    ]);
-
-  if (error) throw error;
-  return data;
-}
-
 export async function getProfile(userId: string) {
   const { data, error } = await supabase
     .from('profiles')
